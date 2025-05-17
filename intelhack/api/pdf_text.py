@@ -30,6 +30,6 @@ def extract_text_and_note_images(pdf_path, output_path):
 
 if __name__ == "__main__":
     pdf_path = "dsa.pdf"  # ← Change this to your actual file
-    output_path = "data/pdfoutput.txt"
+    output_path = "text.txt"
 
     extract_text_and_note_images(pdf_path, output_path)
