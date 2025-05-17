@@ -19,7 +19,7 @@ function UploadPage() {
     formData.append('pdf', file);
 
     try {
-      const response = await fetch('http://localhost:3000/api/upload', {
+      const response = await fetch('https://9v5mh8sg-3000.usw3.devtunnels.ms/api/upload', {
         method: 'POST',
         body: formData,
       });
