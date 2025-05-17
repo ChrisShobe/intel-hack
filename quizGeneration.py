@@ -1,219 +1,262 @@
 import re
+import csv
 import json
-from transformers import pipeline, T5ForConditionalGeneration, T5Tokenizer
+from typing import List, Dict
 
-class EnhancedQuizSystem:
-    def __init__(self, use_refinement=True):
-        # Initialize components
-        self.generator = QuizGenerator()
-        self.quality_filter = QuestionQualityFilter()
-        self.use_refinement = use_refinement
-        self.refinement_model = self.load_refinement_model() if use_refinement else None
-        
-    def load_refinement_model(self):
-        """Load the trained T5 model for question refinement"""
-        try:
-            model = T5ForConditionalGeneration.from_pretrained("models/slide2quiz-model")
-            tokenizer = T5Tokenizer.from_pretrained("models/slide2quiz-model")
-            return pipeline(
-                "text2text-generation", 
-                model=model, 
-                tokenizer=tokenizer,
-                device=-1  # Use CPU to save memory
-            )
-        except Exception as e:
-            print(f"Warning: Could not load refinement model ({str(e)}), using basic filtering only")
-            return None
-    
-    def clean_text(self, text):
-        """Clean unwanted characters and formatting"""
-        if not isinstance(text, str):
-            return ""
-            
-        text = re.sub(r'\\u[0-9a-fA-F]{4}', '', text)  # Remove unicode escapes
-        text = re.sub(r'\s+', ' ', text).strip()  # Normalize whitespace
-        text = re.sub(r'[“”„‟]', '"', text)  # Normalize quotes
-        text = re.sub(r'[‘’‛`]', "'", text)  # Normalize apostrophes
-        return text
-    
-    def refine_question(self, question, context):
-        """Use ML model to improve poorly phrased questions"""
-        if not self.refinement_model:
-            return question
-            
-        try:
-            prompt = f"improve this question: {question} using context: {context[:300]}"
-            refined = self.refinement_model(
-                prompt, 
-                max_length=100,
-                num_beams=3,
-                early_stopping=True
-            )[0]['generated_text']
-            
-            # Ensure the refined question ends with a question mark
-            refined = refined.strip()
-            if not refined.endswith('?'):
-                refined += '?'
-            return refined
-        except Exception as e:
-            print(f"Question refinement failed: {str(e)}")
-            return question
-    
-    def refine_answer(self, answer, question):
-        """Clean and improve answers based on the question"""
-        answer = self.clean_text(answer)
-        
-        # Remove citations and references
-        answer = re.sub(r'\([^)]*\)', '', answer)  # Remove parentheses content
-        answer = re.sub(r'\[[^\]]*\]', '', answer)  # Remove bracket content
-        
-        # Remove unnecessary clauses
-        answer = re.sub(r'(?:Note|Important|Recall that|See also)[^.!?]*[.!?]', '', answer)
-        
-        # Focus the answer on the question's subject
-        if "define" in question.lower() or "what is" in question.lower():
-            # For definition questions, take just the first complete definition
-            sentences = re.split(r'(?<=[.!?])\s+', answer)
-            if sentences:
-                return sentences[0]
-        
-        # For other questions, limit to 2 sentences
-        sentences = re.split(r'(?<=[.!?])\s+', answer)
-        if len(sentences) > 2:
-            answer = ' '.join(sentences[:2])
-        
-        return answer
-    
-    def is_question_valid(self, question_item, context):
-        """Comprehensive validation of question-answer pairs"""
-        question = question_item['question']
-        answer = question_item['answer']
-        term = question_item.get('term', '')
-        
-        # Check for trivial terms
-        trivial_terms = {'it', 'they', 'them', 'this', 'that', 'there', 
-                        'have', 'has', 'had', 'do', 'does', 'did'}
-        if term.lower() in trivial_terms:
-            return False
-            
-        # Check question structure
-        if (not question.endswith('?') or 
-            len(question.split()) < 4 or 
-            len(question) < 10):
-            return False
-            
-        # Check answer quality
-        if (answer.lower() == "definition not found in the text" or
-            len(answer.split()) < 3 or
-            len(answer) < 10):
-            return False
-            
-        # Check if answer actually addresses the question
-        if term and term.lower() not in answer.lower():
-            return False
-            
-        return True
-    
-    def process_text(self, full_text, min_quality=0.7):
-        """Full processing pipeline with quality control"""
-        # Generate initial questions
-        quiz_data = self.generator.process_text(full_text)
-        final_output = []
-        
-        for chunk in quiz_data:
-            if not chunk.get('questions'):
-                continue
-                
-            text_chunk = chunk['text_preview']
-            filtered_questions = []
-            
-            for question_item in chunk['questions']:
-                # Initial cleaning
-                question_item['question'] = self.clean_text(question_item['question'])
-                question_item['answer'] = self.clean_text(question_item['answer'])
-                
-                # Skip invalid questions early
-                if not self.is_question_valid(question_item, text_chunk):
-                    continue
-                
-                # Refine answer based on question
-                question_item['answer'] = self.refine_answer(
-                    question_item['answer'],
-                    question_item['question']
-                )
-                
-                # Quality assessment
-                quality_score = self.quality_filter.score_question(
-                    question_item['question'],
-                    text_chunk
-                )
-                
-                # Try to improve low-quality questions
-                if quality_score < min_quality and self.use_refinement:
-                    refined_question = self.refine_question(
-                        question_item['question'],
-                        text_chunk
-                    )
-                    refined_score = self.quality_filter.score_question(
-                        refined_question,
-                        text_chunk
-                    )
-                    
-                    if refined_score >= quality_score:  # Only keep if improved
-                        question_item['question'] = refined_question
-                        quality_score = refined_score
-                
-                # Final quality check
-                if quality_score >= min_quality:
-                    question_item['confidence'] = round(quality_score, 2)
-                    filtered_questions.append(question_item)
-            
-            # Keep best questions per chunk
-            if filtered_questions:
-                filtered_questions.sort(key=lambda x: x.get('confidence', 0), reverse=True)
-                final_output.append({
-                    'chunk_number': chunk['chunk_number'],
-                    'text_preview': chunk['text_preview'],
-                    'questions': filtered_questions[:5]  # Top 5 questions
-                })
-        
-        return final_output
 
-class QuestionQualityFilter:
+class RobustQuizGenerator:
     def __init__(self):
-        try:
-            self.classifier = pipeline(
-                "zero-shot-classification",
-                model="facebook/bart-large-mnli",
-                device=-1  # Use CPU
-            )
-            self.labels = [
-                "clear academic question",
-                "grammatically correct",
-                "answerable from given text",
-                "conceptually sound",
-                "focused on key concepts"
-            ]
-        except Exception as e:
-            print(f"Could not initialize quality filter: {str(e)}")
-            self.classifier = None
-    
-    def score_question(self, question, context):
-        if not self.classifier:
-            return 0.7  # Default passing score if filter unavailable
-            
-        try:
-            result = self.classifier(
-                question,
-                self.labels,
-                multi_label=True,
-                hypothesis_template="This question is about {}."
-            )
-            # Weight the scores (focus more on clarity and answerability)
-            weights = [0.4, 0.2, 0.3, 0.05, 0.05]
-            weighted_score = sum(s*w for s,w in zip(result['scores'], weights))
-            return min(1.0, weighted_score * 1.2)  # Slight boost
-        except:
-            return 0.5  # Neutral score if classification fails
+        # Simplified and escaped regex patterns
+        self.definition_patterns = [
+            r"\b{term}\b (?:is|are|refers to|means|is defined as|is called|is known as|denotes|represents)",
+            r"\b(The|A|An)\b {term}\b (?:is|are|was|were)",
+            r"\b{term}\b(?:, which| that) (?:is|are|has|have|can|may)",
+            r"\b(?:Function|Purpose|Role|Concept)\b of {term}\b (?:is|are)",
+            r"\b{term}\b (?:plays|serves|acts as) (?:a|an|the) (?:key|important|crucial) (?:role|part|function)",
+            r"\b{term}\b (?:is|are) (?:used for|employed in|important for|critical to)",
+            r"\bIn\b (?:.*?), {term}\b (?:is|are)"
+        ]
+       
+        self.question_templates = [
+            "What is {term}?",
+            "Define {term}.",
+            "What is the purpose of {term}?",
+            "Explain {term}.",
+            "Describe {term}.",
+            "What does {term} mean?",
+            "How would you explain {term}?",
+            "What is the significance of {term}?"
+        ]
+       
+        self.excluded_terms = {
+            'page', 'chunk', 'it', 'these', 'this', 'that', 'they', 'their',
+            'there', 'which', 'what', 'where', 'when', 'how', 'why', 'kugonza',
+            'arthur', 'note', 'drawing', 'example', 'examples', 'has', 'have',
+            'had', 'having', 'use', 'used', 'using', 'each', 'some', 'many',
+            'and', 'the', 'are', 'for', 'with', 'from'
+        }
 
-# Your QuizGenerator class would remain the same as before
+
+    def clean_text(self, text: str) -> str:
+        """Remove unwanted patterns and clean the text"""
+        if not text:
+            return ""
+           
+        try:
+            text = re.sub(r'--- Page \d+ ---', '', text)
+            text = re.sub(r'@Kugonza Arthur H 0701 366474', '', text)
+            text = re.sub(r'S\.1 BIOLOGY TEACHING NOTES', '', text)
+            text = re.sub(r'--- Chunk \d+ ---', '', text)
+            return ' '.join(text.split())
+        except Exception as e:
+            print(f"Error cleaning text: {str(e)}")
+            return text
+
+
+    def safe_regex_search(self, pattern: str, text: str) -> bool:
+        """Safely check if a regex pattern matches text"""
+        try:
+            return bool(re.search(pattern, text, re.IGNORECASE))
+        except re.error:
+            return False
+
+
+    def extract_meaningful_terms(self, text: str) -> List[str]:
+        """Extract potential terms for questions with robust patterns"""
+        if not text:
+            return []
+           
+        # Simple and safe patterns
+        patterns = [
+            r'\b([A-Z][a-zA-Z]{2,}(?:\s+[A-Z][a-zA-Z]+)*\b)',  # Capitalized terms
+            r'\b([a-z]{3,}\s+(?:theory|concept|method|principle|law|model|cell|tissue|organ|system))\b',
+            r'\b([A-Za-z]{3,}\s+[A-Za-z]{3,})\b(?=\s+is|\s+are|\s+means)',  # Terms before definitions
+        ]
+       
+        candidates = []
+        for pattern in patterns:
+            try:
+                matches = re.findall(pattern, text)
+                candidates.extend(matches)
+            except re.error as e:
+                print(f"Regex error with pattern '{pattern}': {str(e)}")
+                continue
+       
+        # Filter terms
+        filtered = []
+        for term in candidates:
+            term_lower = term.lower()
+            if (term_lower not in self.excluded_terms and
+                len(term.split()) <= 3 and
+                len(term) >= 4 and
+                not term.isnumeric()):
+                filtered.append(term)
+       
+        # Count occurrences
+        term_counts = {}
+        for term in filtered:
+            term_counts[term] = term_counts.get(term, 0) + text.lower().count(term.lower())
+       
+        return sorted(term_counts.keys(), key=lambda x: term_counts[x], reverse=True)[:5]
+
+
+    def find_definition(self, text: str, term: str) -> str:
+        """Find a definition or explanation for the given term"""
+        if not text or not term:
+            return ""
+           
+        sentences = re.split(r'(?<=[.!?])\s+', text)
+        term_lower = term.lower()
+       
+        for sent in sentences:
+            if term_lower in sent.lower():
+                # Try each definition pattern safely
+                for pat in self.definition_patterns:
+                    try:
+                        regex = pat.format(term=re.escape(term))
+                        if re.search(regex, sent, re.IGNORECASE):
+                            return self.clean_text(sent)
+                    except re.error as e:
+                        print(f"Regex error in definition pattern: {str(e)}")
+                        continue
+               
+                # Fallback: return the sentence if it contains the term
+                return self.clean_text(sent)
+       
+        return ""
+
+
+    def generate_questions(self, text: str) -> List[Dict[str, str]]:
+        """Generate quiz questions with robust error handling"""
+        if not text:
+            return []
+           
+        cleaned_text = self.clean_text(text)
+        terms = self.extract_meaningful_terms(cleaned_text)
+        questions = []
+       
+        for i, term in enumerate(terms):
+            try:
+                answer = self.find_definition(cleaned_text, term)
+               
+                # Skip if answer is poor quality
+                if not answer or len(answer.split()) < 5:
+                    continue
+                   
+                # Skip if answer just repeats the term
+                term_words = set(term.lower().split())
+                answer_words = set(answer.lower().split())
+                if term_words.issubset(answer_words):
+                    continue
+                   
+                question = self.question_templates[i % len(self.question_templates)].format(term=term)
+                questions.append({
+                    "question": question,
+                    "answer": answer,
+                    "term": term
+                })
+                if len(questions) >= 3:
+                    break
+            except Exception as e:
+                print(f"Error generating question for term '{term}': {str(e)}")
+                continue
+               
+        return questions
+
+
+    def process_text(self, full_text: str) -> List[Dict[str, any]]:
+        """Process the full text with error handling"""
+        if not full_text:
+            return []
+           
+        try:
+            chunks = re.split(r'\n{2,}|(?=\b(?:Section|Chapter|Unit|TOPIC)\b)', full_text)
+            results = []
+           
+            for idx, chunk in enumerate(chunks):
+                try:
+                    chunk = self.clean_text(chunk.strip())
+                    if not chunk or len(chunk) < 100:
+                        continue
+                       
+                    questions = self.generate_questions(chunk)
+                    if questions:
+                        results.append({
+                            "chunk_number": idx + 1,
+                            "text_preview": chunk[:200] + ("..." if len(chunk) > 200 else ""),
+                            "questions": questions
+                        })
+                except Exception as e:
+                    print(f"Error processing chunk {idx + 1}: {str(e)}")
+                    continue
+                   
+            return results
+        except Exception as e:
+            print(f"Error splitting text into chunks: {str(e)}")
+            return []
+
+
+def save_output(data: List[Dict[str, any]], filename: str, format: str = 'json'):
+    """Save output in specified format with error handling"""
+    if not data:
+        print("No data to save")
+        return
+       
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            if format == 'json':
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            elif format == 'csv':
+                writer = csv.writer(f)
+                writer.writerow(['Chunk Number', 'Text Preview', 'Question', 'Answer', 'Term'])
+                for chunk in data:
+                    for question in chunk['questions']:
+                        writer.writerow([
+                            chunk['chunk_number'],
+                            chunk['text_preview'],
+                            question['question'],
+                            question['answer'],
+                            question.get('term', '')
+                        ])
+        print(f"Successfully saved {len(data)} records to {filename}")
+    except Exception as e:
+        print(f"Error saving {filename}: {str(e)}")
+
+
+def main():
+    input_filename = "chunk.txt"
+    output_json = "quiz_data.json"
+    output_csv = "quiz_output.csv"
+   
+    try:
+        print(f"Reading input file: {input_filename}")
+        with open(input_filename, 'r', encoding='utf-8') as f:
+            full_text = f.read()
+           
+        if not full_text.strip():
+            print("Error: Input file is empty")
+            return
+           
+        print("Processing text...")
+        generator = RobustQuizGenerator()
+        quiz_data = generator.process_text(full_text)
+       
+        if quiz_data:
+            print(f"Generated {sum(len(chunk['questions']) for chunk in quiz_data)} questions")
+            save_output(quiz_data, output_json, 'json')
+            save_output(quiz_data, output_csv, 'csv')
+        else:
+            print("No quiz questions were generated. Possible reasons:")
+            print("- The text doesn't contain clear definitions or explanations")
+            print("- The terms found were filtered out as too common")
+            print("- The text structure may need different parsing")
+            print("Try adjusting the excluded_terms or definition_patterns in the code.")
+           
+    except FileNotFoundError:
+        print(f"Error: Input file '{input_filename}' not found.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {str(e)}")
+
+
+if __name__ == "__main__":
+    main()
