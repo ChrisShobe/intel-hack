@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function UploadPage() {
   const [file, setFile] = useState(null);
@@ -19,18 +19,45 @@ function UploadPage() {
     formData.append('pdf', file);
 
     try {
-      const response = await fetch('https://9v5mh8sg-3000.usw3.devtunnels.ms/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await fetch('/api/upload', { method: 'POST', body: formData })
+
+      if (!response.ok) {
+        const errorResult = await response.json();
+        setStatus(errorResult.message || 'Upload failed (server error).');
+        return;
+      }
 
       const result = await response.json();
       setStatus(result.message || 'Upload complete!');
     } catch (err) {
-      setStatus('Upload failed.');
+      setStatus('Upload failed (network error).');
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    const apiURL = '/api';
+
+    fetch(apiURL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Server is running:', data);
+      })
+      .catch((error) => {
+        console.error('Error fetching the server status:', error);
+    });
+  }
+  , []);
 
   return (
     <div className="p-4 min-h-screen bg-[#4F959D] text-white flex flex-col items-center justify-center">
@@ -51,7 +78,7 @@ function UploadPage() {
         {/* Clickable icon triggers file input */}
         <label htmlFor="file-upload" className="cursor-pointer">
           <img
-            src="src/uploadicon.png"
+            src="uploadicon.png"
             alt="Upload Icon"
             className="w-20 h-20 hover:opacity-80 transition"
           />

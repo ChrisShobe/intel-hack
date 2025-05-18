@@ -1,33 +1,39 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
-from pdf_text import extract_text_and_note_images  # Import your PDF processor
 
-app = Flask(__name__)
-CORS(app)
+app = Flask(__name__, static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../dist')), static_url_path='')
+CORS(app) # Enable CORS so React can access this server
 
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# 🔄 Route to handle PDF upload and processing
+# filepath: intel-hack/intelhack/api/server.py
+@app.route('/api', methods=['GET'])
+def home():
+    return jsonify({'message': 'Server is running!'})
+
 @app.route('/api/upload', methods=['POST'])
 def upload_pdf():
     if 'pdf' not in request.files:
-        return jsonify({"error": "No file provided"}), 400
+        return jsonify({'message': 'No file part in the request'}), 400
 
-    pdf = request.files['pdf']
-    filename = pdf.filename
-    save_path = os.path.join(UPLOAD_FOLDER, filename)
-    pdf.save(save_path)
+    file = request.files['pdf']
+    if file.filename == '':
+        return jsonify({'message': 'No selected file'}), 400
 
-    # Process the uploaded PDF
-    output_path = os.path.join("data", "pdfoutput.txt")
-    extract_text_and_note_images(save_path, output_path)
+    filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(filepath)
 
-    return jsonify({
-        "message": f"Processed '{filename}' successfully.",
-        "output_file": output_path
-    })
+    return jsonify({'message': 'Upload complete!'})
 
-if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=3000)
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react_app(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+if __name__ == '__main__':
+  app.run(debug=True, port=3000, host='0.0.0.0')
