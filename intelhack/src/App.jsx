@@ -9,7 +9,7 @@ return (
 <div>
 <BrowserRouter>
 <Routes>
-    <Route path="/" element={<UploadPage />} />
+    <Route path="/" element={<QuestionPage />} />
     <Route path="/upload" element={<UploadPage />} />
     <Route path="/questions" element={<QuestionPage />}/>
     {/* <Route path="/about" element={<About />}></Route> */}
