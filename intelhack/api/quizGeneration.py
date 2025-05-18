@@ -258,5 +258,31 @@ def main():
         print(f"An unexpected error occurred: {str(e)}")
 
 
-if __name__ == "__main__":
-    main()
+def generate_quiz_from_chunk_file(input_path: str, json_out: str, csv_out: str):
+    try:
+        print(f"[✓] Reading chunked input from: {input_path}")
+        with open(input_path, 'r', encoding='utf-8') as f:
+            full_text = f.read()
+
+        if not full_text.strip():
+            print("[!] Input file is empty")
+            return []
+
+        generator = RobustQuizGenerator()
+        quiz_data = generator.process_text(full_text)
+
+        if quiz_data:
+            print(f"[✓] Generated {sum(len(chunk['questions']) for chunk in quiz_data)} questions")
+            save_output(quiz_data, json_out, 'json')
+            save_output(quiz_data, csv_out, 'csv')
+        else:
+            print("[!] No quiz questions generated.")
+        
+        return quiz_data
+
+    except FileNotFoundError:
+        print(f"[!] Input file '{input_path}' not found.")
+        return []
+    except Exception as e:
+        print(f"[!] Unexpected error: {str(e)}")
+        return []

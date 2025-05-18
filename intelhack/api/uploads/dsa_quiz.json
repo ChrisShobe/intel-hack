@@ -1,0 +1,685 @@
+[
+  {
+    "chunk_number": 6,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 3 Swagatika Dalai CLASSIFICATION OF DATA STRUCTURE Based on how the data items are operated, it will classify into two broad categories.  Primitive Data Structure  No...",
+    "questions": [
+      {
+        "question": "What is the purpose of Linear Data Structure?",
+        "answer": "Linear Data Structure: In which the data items are stored in sequence order.",
+        "term": "Linear Data Structure"
+      },
+      {
+        "question": "Describe data structures.",
+        "answer": "Example: Arrays, Linked Lists, Stacks and Queues Non Linear Data Structure: In Non-Linear data structures, the data items are not in sequence.",
+        "term": "data structures"
+      }
+    ]
+  },
+  {
+    "chunk_number": 8,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 5 Swagatika Dalai ALGORITHM: An algorithm is a method of representing the step by step logical procedure for solving a problem. It is a tool for finding the logic of a ...",
+    "questions": [
+      {
+        "question": "What is the purpose of Input?",
+        "answer": "In addition every algorithm must satisfy the following criteria:  Input: There are zero or more quantities which are externally supplied.",
+        "term": "Input"
+      },
+      {
+        "question": "Explain Complexity.",
+        "answer": "ALGORITHM COMPLEXITY:  After designing an algorithm, we have to be checking its correctness.",
+        "term": "Complexity"
+      }
+    ]
+  },
+  {
+    "chunk_number": 10,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 7 Swagatika Dalai 2. Variable space requirement: - This component consist of the space needed by structure variable whose size depends on the particular instruction I ,...",
+    "questions": [
+      {
+        "question": "What is TIME?",
+        "answer": "TIME-SPACE TRADE-OFF:  There may be more than one approach (or algorithm) to solve a problem.",
+        "term": "TIME"
+      },
+      {
+        "question": "Describe SPACE TRADE.",
+        "answer": "TIME-SPACE TRADE-OFF:  There may be more than one approach (or algorithm) to solve a problem.",
+        "term": "SPACE TRADE"
+      }
+    ]
+  },
+  {
+    "chunk_number": 12,
+    "text_preview": "Chapter-2 STRING PROCESSING A string in C is a array of character.  It is a one dimensional array type of char.  Every string is terminated by null character( ‘\\0’) .  The predefined functions gets...",
+    "questions": [
+      {
+        "question": "Define Strlen.",
+        "answer": " Diffrent user defined functios are:  Strlen()  Strcpy()  Strcmp()  Strcat() Strlen():  The strlen( ) function is used to calculate the length of the string.",
+        "term": "Strlen"
+      },
+      {
+        "question": "What is the purpose of Strcpy?",
+        "answer": " Diffrent user defined functios are:  Strlen()  Strcpy()  Strcmp()  Strcat() Strlen():  The strlen( ) function is used to calculate the length of the string.",
+        "term": "Strcpy"
+      },
+      {
+        "question": "Describe Syntax.",
+        "answer": "Syntax: char str_name[str_size]; Example: char s[5]; Initialization of strings char c[]=\"abcd\"; String handling functions  Many library function are defined under header file <string.h> to perform different tasks.",
+        "term": "Syntax"
+      }
+    ]
+  },
+  {
+    "chunk_number": 13,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 9 Swagatika Dalai strcpy(Destination_String,Source_String); printf(\"%s\", Destination_String); Output: Learn C Online Strcmp() • Strcmp() in C programming language is us...",
+    "questions": [
+      {
+        "question": "What is the purpose of Output?",
+        "answer": "KIIT POLYTECHNIC Data Structure 9 Swagatika Dalai strcpy(Destination_String,Source_String); printf(\"%s\", Destination_String); Output: Learn C Online Strcmp() • Strcmp() in C programming language is used to compare two strings.",
+        "term": "Output"
+      },
+      {
+        "question": "Explain Strcmp.",
+        "answer": "KIIT POLYTECHNIC Data Structure 9 Swagatika Dalai strcpy(Destination_String,Source_String); printf(\"%s\", Destination_String); Output: Learn C Online Strcmp() • Strcmp() in C programming language is used to compare two strings.",
+        "term": "Strcmp"
+      },
+      {
+        "question": "Describe Syntax.",
+        "answer": "Syntax: int strcmp(string1, string2); Example: char *string1 = \"Learn C Online\"; char *string2 = \"Learn C Online\"; int ret; ret=strcmp(string1, string2); printf(\"%d\",ret); Output: 0 Strcat() • The strcat() function is used for string concatenation in C programming language.",
+        "term": "Syntax"
+      }
+    ]
+  },
+  {
+    "chunk_number": 15,
+    "text_preview": "Chapter-3 ARRAYS An array is a finite, ordered and collection of homogeneous data elements. finite – It contain limited no. of element. ordered – All the elements are stored one by one in a contiguous...",
+    "questions": [
+      {
+        "question": "Explain Chapter.",
+        "answer": "Chapter-3 ARRAYS An array is a finite, ordered and collection of homogeneous data elements.",
+        "term": "Chapter"
+      }
+    ]
+  },
+  {
+    "chunk_number": 16,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 11 Swagatika Dalai Operation on Array 1. TRAVERSAL This operation is used to visit all the elements of the array. Void traverse (int a[], int n) { int i; for(i=0; i<n; ...",
+    "questions": [
+      {
+        "question": "Describe Printf.",
+        "answer": "Void traverse (int a[], int n) { int i; for(i=0; i<n; i++) Printf(“%d”,a[i]); } 2.",
+        "term": "Printf"
+      }
+    ]
+  },
+  {
+    "chunk_number": 17,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 12 Swagatika Dalai for (i = pos-1; i<n-1; i++) { a[i] = a[i+1]; } n- - ; return(0); } Memory Representation of 2D Array - The array having two subscript is called as 2D...",
+    "questions": [
+      {
+        "question": "Explain Column.",
+        "answer": "Column-major order Row-major Order In row-major order the row elements are focused first that means elements of matrix are stored on a row-by-row basis.",
+        "term": "Column"
+      }
+    ]
+  },
+  {
+    "chunk_number": 19,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 14 Swagatika Dalai Address Calculation of Matrix in Memory Row-major order Suppose a [u1] [u2] is a 2D array u1 = no. of row u2 = no. of column Address of a[i][j] = b+(...",
+    "questions": [
+      {
+        "question": "Explain Memory Row.",
+        "answer": "KIIT POLYTECHNIC Data Structure 14 Swagatika Dalai Address Calculation of Matrix in Memory Row-major order Suppose a [u1] [u2] is a 2D array u1 = no.",
+        "term": "Memory Row"
+      }
+    ]
+  },
+  {
+    "chunk_number": 21,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 16 Swagatika Dalai of memory. To avoid such wastage, we can store only non-zero elements. If we store only non- zero elements, it reduces the traversal time and the sto...",
+    "questions": [
+      {
+        "question": "What is zero element?",
+        "answer": "To avoid such wastage, we can store only non-zero elements.",
+        "term": "zero element"
+      },
+      {
+        "question": "Explain Column.",
+        "answer": "2D array is used to represent a sparse matrix in which there are three rows named as  Row: Index of row, where non-zero element is located  Column: Index of column, where non-zero element is located  Value: Value of the non zero element located at index – (row,column) Linked List representation of the sparse matrix In a linked list representation, the linked list data structure is used to represent the sparse matrix.",
+        "term": "Column"
+      }
+    ]
+  },
+  {
+    "chunk_number": 25,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 20 Swagatika Dalai INSERTION IN STACK (PUSH OPERATION) This operation is used to insert an element in stack at the TOP of the stack. Algorithm :- PUSH (STACK, TOP, MAXS...",
+    "questions": [
+      {
+        "question": "Explain Return.",
+        "answer": "If TOP = 0 the print Underflow and Return.",
+        "term": "Return"
+      }
+    ]
+  },
+  {
+    "chunk_number": 26,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 21 Swagatika Dalai ARITHMETIC EXPRESSION There are 3 notation to represent an arithmetic expression. 1. Infix notation 2. Prefix notation 3. Postfix notation 1. INFIX N...",
+    "questions": [
+      {
+        "question": "What is Operand?",
+        "answer": "• Here the notation is <Operand><Operator><Operand> • This is called infix because the operators come in between the operands.",
+        "term": "Operand"
+      },
+      {
+        "question": "Define Here.",
+        "answer": "KIIT POLYTECHNIC Data Structure 21 Swagatika Dalai ARITHMETIC EXPRESSION There are 3 notation to represent an arithmetic expression.",
+        "term": "Here"
+      },
+      {
+        "question": "What is the purpose of Operator?",
+        "answer": "• Here the notation is <Operand><Operator><Operand> • This is called infix because the operators come in between the operands.",
+        "term": "Operator"
+      }
+    ]
+  },
+  {
+    "chunk_number": 27,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 22 Swagatika Dalai 3. POSTFIX NOTATION • This notation is called as postfix or suffix notation where operator is suffixed by operand. • Here the notation is <Operand ><...",
+    "questions": [
+      {
+        "question": "Define Operand.",
+        "answer": "POSTFIX NOTATION • This notation is called as postfix or suffix notation where operator is suffixed by operand.",
+        "term": "Operand"
+      }
+    ]
+  },
+  {
+    "chunk_number": 28,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 23 Swagatika Dalai Ex: A+(B*C – (D/E^F)*G)*H) Symbol Scanned STACK EXPRESSION (POSTFIX) ( A ( A + (+ A ( (+( A B (+( AB * (+(* AB C (+(* ABC - (+(- ABC* C (+(-( ABC* D ...",
+    "questions": [
+      {
+        "question": "Explain Scan.",
+        "answer": "KIIT POLYTECHNIC Data Structure 23 Swagatika Dalai Ex: A+(B*C – (D/E^F)*G)*H) Symbol Scanned STACK EXPRESSION (POSTFIX) ( A ( A + (+ A ( (+( A B (+( AB * (+(* AB C (+(* ABC - (+(- ABC* C (+(-( ABC* D (+(-( ABC*D / (+(-(/ ABC*D E (+(-(/ ABC*DE ^ (+(-(/^ ABC*DE F (+(-(/^ ABC*DEF ) (+(- ABC*DEF^/ * (+(-* ABC*DEF^/ G (+(-* ABC*DEF^/G ) (+ ABC*DEF^/G*- * (+* ABC*DEF^/G*- H (+* ABC*DEF^/G*-H ) ABC*DEF^/G*-H*+ Equivalent Postfix Expression : ABC*DEF^/G*-H*+ EVALUATION OF POSTFIX EXPRESSION Algorithm: This algorithm finds the value of an arithmetic expression P written in Postfix notation.",
+        "term": "Scan"
+      },
+      {
+        "question": "Describe Swagatika Dalai Ex.",
+        "answer": "KIIT POLYTECHNIC Data Structure 23 Swagatika Dalai Ex: A+(B*C – (D/E^F)*G)*H) Symbol Scanned STACK EXPRESSION (POSTFIX) ( A ( A + (+ A ( (+( A B (+( AB * (+(* AB C (+(* ABC - (+(- ABC* C (+(-( ABC* D (+(-( ABC*D / (+(-(/ ABC*D E (+(-(/ ABC*DE ^ (+(-(/^ ABC*DE F (+(-(/^ ABC*DEF ) (+(- ABC*DEF^/ * (+(-* ABC*DEF^/ G (+(-* ABC*DEF^/G ) (+ ABC*DEF^/G*- * (+* ABC*DEF^/G*- H (+* ABC*DEF^/G*-H ) ABC*DEF^/G*-H*+ Equivalent Postfix Expression : ABC*DEF^/G*-H*+ EVALUATION OF POSTFIX EXPRESSION Algorithm: This algorithm finds the value of an arithmetic expression P written in Postfix notation.",
+        "term": "Swagatika Dalai Ex"
+      }
+    ]
+  },
+  {
+    "chunk_number": 29,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 24 Swagatika Dalai b) Evaluate B X A. c) Place the result of (b) on STACK. [End of if str.] 5. Set value equal to the top element on STACK. 6. Exit Ex: 5, 6, 2, +, *, 1...",
+    "questions": [
+      {
+        "question": "What is STACK?",
+        "answer": "c) Place the result of (b) on STACK.",
+        "term": "STACK"
+      }
+    ]
+  },
+  {
+    "chunk_number": 30,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 25 Swagatika Dalai I. The function should have a base condition. II. The function should come closer towards the base condition. The following is one of the example of ...",
+    "questions": [
+      {
+        "question": "Define Return.",
+        "answer": "and returns the value in the variable fact.",
+        "term": "Return"
+      },
+      {
+        "question": "What is the purpose of Call?",
+        "answer": ".X (n-) X n Physically proved n !",
+        "term": "Call"
+      }
+    ]
+  },
+  {
+    "chunk_number": 31,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 26 Swagatika Dalai Ex: Calculate the factorial of 4. 4 ! = 4 x 3 ! 3 ! = 3 x 2 ! 2 ! = 2 x 1 ! 1 ! = 1 x 0 ! 0 ! = 1 1 ! = 1 x 1 = 1 2 ! = 2 x 1 = 2 3 ! = 3 x 2 = 6 4 !...",
+    "questions": [
+      {
+        "question": "What is Swagatika Dalai Ex?",
+        "answer": "KIIT POLYTECHNIC Data Structure 26 Swagatika Dalai Ex: Calculate the factorial of 4.",
+        "term": "Swagatika Dalai Ex"
+      }
+    ]
+  },
+  {
+    "chunk_number": 33,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 28 Swagatika Dalai Rear = Rear +1 3. Q [Rear] = ITEM 4. Exit DELETION IN QUEUE(Dequeue) Algorithm: Delete (Q, ITEM, FRONT, REAR) This procedure remove element from queu...",
+    "questions": [
+      {
+        "question": "What is Front?",
+        "answer": "Exit DELETION IN QUEUE(Dequeue) Algorithm: Delete (Q, ITEM, FRONT, REAR) This procedure remove element from queue Q.",
+        "term": "Front"
+      },
+      {
+        "question": "What is the purpose of FRONT?",
+        "answer": "Exit DELETION IN QUEUE(Dequeue) Algorithm: Delete (Q, ITEM, FRONT, REAR) This procedure remove element from queue Q.",
+        "term": "FRONT"
+      }
+    ]
+  },
+  {
+    "chunk_number": 35,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 31 Swagatika Dalai DELETION ALGORITHM OF CIRCULAR QUEUE Delete (Q, N, ITEM, FRONT, REAR) This procedure delete an element from a circular queue. 1. If Front = NULL then...",
+    "questions": [
+      {
+        "question": "What is Front?",
+        "answer": "KIIT POLYTECHNIC Data Structure 31 Swagatika Dalai DELETION ALGORITHM OF CIRCULAR QUEUE Delete (Q, N, ITEM, FRONT, REAR) This procedure delete an element from a circular queue.",
+        "term": "Front"
+      },
+      {
+        "question": "Define FRONT.",
+        "answer": "KIIT POLYTECHNIC Data Structure 31 Swagatika Dalai DELETION ALGORITHM OF CIRCULAR QUEUE Delete (Q, N, ITEM, FRONT, REAR) This procedure delete an element from a circular queue.",
+        "term": "FRONT"
+      }
+    ]
+  },
+  {
+    "chunk_number": 38,
+    "text_preview": "Chapter-5 LINKED LIST Linked List is a collection of data elements called as nodes. The node has 2 parts  Info is the data part  Next i.e. the address part that means it points to the next node. If ...",
+    "questions": [
+      {
+        "question": "Define Link.",
+        "answer": "Chapter-5 LINKED LIST Linked List is a collection of data elements called as nodes.",
+        "term": "Link"
+      }
+    ]
+  },
+  {
+    "chunk_number": 39,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 34 SwagatikaDalai Start = 4 info [4] = N Link [4] = 3 info [3] = T Link [3] = 6 info [6] = E Link [6] = 2 info [2] = F Link [2] = 0 i.e. the null value So the list has ...",
+    "questions": [
+      {
+        "question": "Define Step.",
+        "answer": "Step-1 : “Start” holds the address of the first node.",
+        "term": "Step"
+      }
+    ]
+  },
+  {
+    "chunk_number": 40,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 35 SwagatikaDalai 2.Insertion The insertion operation is used to add an element in an existing Linked List. There is various positions where node can be inserted.  Ins...",
+    "questions": [
+      {
+        "question": "What is Insert?",
+        "answer": "KIIT POLYTECHNIC Data Structure 35 SwagatikaDalai 2.Insertion The insertion operation is used to add an element in an existing Linked List.",
+        "term": "Insert"
+      },
+      {
+        "question": "Define Step.",
+        "answer": "Step-1 : Create a new node named as P.",
+        "term": "Step"
+      },
+      {
+        "question": "Explain Linked List.",
+        "answer": "KIIT POLYTECHNIC Data Structure 35 SwagatikaDalai 2.Insertion The insertion operation is used to add an element in an existing Linked List.",
+        "term": "Linked List"
+      }
+    ]
+  },
+  {
+    "chunk_number": 41,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 36 SwagatikaDalai Algorithm: This algorithm is used to insert a node at the end of the linked list. ‘Start’ holds the address of the first node. Step-1 : Create a new n...",
+    "questions": [
+      {
+        "question": "What is Step?",
+        "answer": "Step-1 : Create a new node named as P.",
+        "term": "Step"
+      },
+      {
+        "question": "What is the purpose of Start?",
+        "answer": "‘Start’ holds the address of the first node.",
+        "term": "Start"
+      },
+      {
+        "question": "Explain Exit.",
+        "answer": "Step-2 : If P = NULL then print “Out of memory space” and Exit.",
+        "term": "Exit"
+      }
+    ]
+  },
+  {
+    "chunk_number": 42,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 37 SwagatikaDalai Step-6 : Read Loc Step-7 : Set i = 1 Step-8 : Repeat steps 9 to 11 while Ptr ≠ NULL and i < Loc Step-9 : Set temp = Ptr. Step-10 : Set Ptr = next [Ptr...",
+    "questions": [
+      {
+        "question": "What is Step?",
+        "answer": "KIIT POLYTECHNIC Data Structure 37 SwagatikaDalai Step-6 : Read Loc Step-7 : Set i = 1 Step-8 : Repeat steps 9 to 11 while Ptr ≠ NULL and i < Loc Step-9 : Set temp = Ptr.",
+        "term": "Step"
+      }
+    ]
+  },
+  {
+    "chunk_number": 43,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 38 SwagatikaDalai Algorithm: Start holds the address of the 1st node. Step-1 : Set Ptr = Start Step-2 : Set temp = Start Step-3 : If Ptr = NULL then write ‘UNDERFLOW’ &...",
+    "questions": [
+      {
+        "question": "What is Step?",
+        "answer": "Step-1 : Set Ptr = Start Step-2 : Set temp = Start Step-3 : If Ptr = NULL then write ‘UNDERFLOW’ & Exit.",
+        "term": "Step"
+      },
+      {
+        "question": "What is the purpose of Start Step?",
+        "answer": "Step-1 : Set Ptr = Start Step-2 : Set temp = Start Step-3 : If Ptr = NULL then write ‘UNDERFLOW’ & Exit.",
+        "term": "Start Step"
+      }
+    ]
+  },
+  {
+    "chunk_number": 44,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 39 SwagatikaDalai Algorithm: Start holds the address of the 1st node. Step-1 : Set Ptr = Start Step-2 : Set Loc = 1 Step-3 : Read element Step-4 : Repeat Step-5 and 7 W...",
+    "questions": [
+      {
+        "question": "What is Step?",
+        "answer": "Step-1 : Set Ptr = Start Step-2 : Set Loc = 1 Step-3 : Read element Step-4 : Repeat Step-5 and 7 While Ptr ≠ NULL Step-5 : If element = info[Ptr] then Write ‘Element found at position’, Loc and Exit.",
+        "term": "Step"
+      }
+    ]
+  },
+  {
+    "chunk_number": 45,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 40 SwagatikaDalai Garbage Collection The operating system of a computer may periodically collect all the deleted space on to the free storage list. Any technique which ...",
+    "questions": [
+      {
+        "question": "What is the purpose of free pool?",
+        "answer": "When we delete a particular note from an existing linked list or delete the linked list the space occupied by it must be given back to the free pool.",
+        "term": "free pool"
+      }
+    ]
+  },
+  {
+    "chunk_number": 47,
+    "text_preview": "Chapter-6 TREE A tree is non-linear and a hierarchical data structure consisting of a collection of nodes such that each node of the tree stores a value. Application: The following are the application...",
+    "questions": [
+      {
+        "question": "Describe Child Node.",
+        "answer": "The last nodes of each path are called leaf nodes or external nodes that do not contain a link/pointer to child nodes.",
+        "term": "Child Node"
+      }
+    ]
+  },
+  {
+    "chunk_number": 48,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 42 Swagatika Dalai 5.Degree of a Node: The total count of subtrees attached to that node is called the degree of the node. The degree of a leaf node must be 0. The degr...",
+    "questions": [
+      {
+        "question": "Define Height.",
+        "answer": "8.Height of a node: The number of edges on the longest path from that node to a leaf.",
+        "term": "Height"
+      }
+    ]
+  },
+  {
+    "chunk_number": 52,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 46 Swagatika Dalai 3. Visit all the nodes in the right subtree Left → Root → Right Application- Inorder traversal is used to get infix expression of an expression tree....",
+    "questions": [
+      {
+        "question": "What is Preorder?",
+        "answer": "2.Preorder Traversal- This is also known as depth fist order.",
+        "term": "Preorder"
+      },
+      {
+        "question": "Explain Preorder traversal.",
+        "answer": "2.Preorder Traversal- This is also known as depth fist order.",
+        "term": "Preorder traversal"
+      }
+    ]
+  },
+  {
+    "chunk_number": 54,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 48 Swagatika Dalai o First, we have to insert 45 into the tree as the root of the tree. o Then, read the next element; if it is smaller than the root node, insert it as...",
+    "questions": [
+      {
+        "question": "What is the purpose of Then?",
+        "answer": "o Then, read the next element; if it is smaller than the root node, insert it as the root of the left subtree, and move to the next element.",
+        "term": "Then"
+      },
+      {
+        "question": "Describe First.",
+        "answer": "KIIT POLYTECHNIC Data Structure 48 Swagatika Dalai o First, we have to insert 45 into the tree as the root of the tree.",
+        "term": "First"
+      }
+    ]
+  },
+  {
+    "chunk_number": 57,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 51 Swagatika Dalai Now, let's understand the searching in binary tree using an example. We are taking the binary search tree formed above. Suppose we have to find node ...",
+    "questions": [
+      {
+        "question": "What is Swagatika Dalai Now?",
+        "answer": "KIIT POLYTECHNIC Data Structure 51 Swagatika Dalai Now, let's understand the searching in binary tree using an example.",
+        "term": "Swagatika Dalai Now"
+      }
+    ]
+  },
+  {
+    "chunk_number": 59,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 53 Swagatika Dalai Deletion in Binary Search tree In a binary search tree, we must delete a node from the tree by keeping in mind that the property of BST is not violat...",
+    "questions": [
+      {
+        "question": "What is the purpose of Here?",
+        "answer": "To delete a node from BST, there are three possible situations occur - o The node to be deleted is the leaf node, or, o The node to be deleted has only one child, and, o The node to be deleted has two children 1.When the node to be deleted is the leaf node o It is the simplest case to delete a node in BST.",
+        "term": "Here"
+      }
+    ]
+  },
+  {
+    "chunk_number": 62,
+    "text_preview": "Chapter-7 GRAPH A graph is a non-linear kind of data structure made up of nodes or vertices and edges. Formally, a graph is a pair of sets (V, E), where V is the set of vertices and E is the set of ed...",
+    "questions": [
+      {
+        "question": "Explain Facebook.",
+        "answer": "Graphs are also used in social networks like linkedIn, Facebook.",
+        "term": "Facebook"
+      }
+    ]
+  },
+  {
+    "chunk_number": 63,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 56 Swagatika Dalai 2. Directed Graph or Digraph: A graph G = (V, E) with a mapping f such that every edge maps onto some ordered pair of vertices (Vi, Vj) is called Dig...",
+    "questions": [
+      {
+        "question": "What is the purpose of Digraph?",
+        "answer": "Directed Graph or Digraph: A graph G = (V, E) with a mapping f such that every edge maps onto some ordered pair of vertices (Vi, Vj) is called Digraph.",
+        "term": "Digraph"
+      }
+    ]
+  },
+  {
+    "chunk_number": 65,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 58 Swagatika Dalai 12. Adjacent Nodes: Two nodes are called adjacent if they are connected through an edge. 13. Path: sequence of vertices in which each pair of success...",
+    "questions": [
+      {
+        "question": "What is the purpose of Undirected Graph?",
+        "answer": "We can represent directed as well as undirected graphs using adjacency matrices..",
+        "term": "Undirected Graph"
+      },
+      {
+        "question": "Explain Here.",
+        "answer": "Example: Here, the vertex 'a' and vertex 'b' has a no connectivity between each other and also to any other vertices.",
+        "term": "Here"
+      },
+      {
+        "question": "Describe Path.",
+        "answer": "Path: sequence of vertices in which each pair of successive vertices is connected by an edge 14.",
+        "term": "Path"
+      }
+    ]
+  },
+  {
+    "chunk_number": 69,
+    "text_preview": "Chapter-8 SORTING SEARCHING & MERGING Sorting refers to the operation or technique of arranging and rearranging sets of data in some specific order. Sorting can be done in ascending and descending ord...",
+    "questions": [
+      {
+        "question": "What is Here?",
+        "answer": "This algorithm is not suitable for large data sets as its average and worst case complexity are of Ο(n2) where n is the number of items.",
+        "term": "Here"
+      },
+      {
+        "question": "Explain Algorithm.",
+        "answer": "BUBBLE SORT Bubble sort is a simple sorting algorithm.",
+        "term": "Algorithm"
+      }
+    ]
+  },
+  {
+    "chunk_number": 70,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 62 Swagatika Dalai Here, 10 is smaller than 35 that are not sorted. So, swapping is required. Now, we reach at the end of the array. After first pass, the array will be...",
+    "questions": [
+      {
+        "question": "Define Here.",
+        "answer": "KIIT POLYTECHNIC Data Structure 62 Swagatika Dalai Here, 10 is smaller than 35 that are not sorted.",
+        "term": "Here"
+      },
+      {
+        "question": "What is the purpose of the array?",
+        "answer": "Now, we reach at the end of the array.",
+        "term": "the array"
+      },
+      {
+        "question": "Describe Swagatika Dalai Here.",
+        "answer": "KIIT POLYTECHNIC Data Structure 62 Swagatika Dalai Here, 10 is smaller than 35 that are not sorted.",
+        "term": "Swagatika Dalai Here"
+      }
+    ]
+  },
+  {
+    "chunk_number": 71,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 63 Swagatika Dalai Time Complexity Case Time Complexity Best Case O(n) Average Case O(n2) Worst Case O(n2) Space Complexity Space Complexity O(1) Quick sort Quick sort ...",
+    "questions": [
+      {
+        "question": "Explain Quicksort.",
+        "answer": "Conquer: Recursively, sort two subarrays with Quicksort.",
+        "term": "Quicksort"
+      }
+    ]
+  },
+  {
+    "chunk_number": 72,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 64 Swagatika Dalai 3. for (j=beg+1; j<=end; j++) 4. if (a[j]<= pivotItem) 5. i=i+1 6. if(i!=j) 7. swap(a[i],a[j]) 8. swap(a[beg], a[i]) 9. return i End Working of Quick...",
+    "questions": [
+      {
+        "question": "What is Since?",
+        "answer": "Since, pivot is at left, so algorithm starts from right and move towards left.",
+        "term": "Since"
+      },
+      {
+        "question": "Explain Because.",
+        "answer": "Because, a[pivot] > a[right], so, algorithm will swap a[pivot] with a[right], and pivot moves to right, as - Now, a[left] = 19, a[right] = 24, and a[pivot] = 24.",
+        "term": "Because"
+      }
+    ]
+  },
+  {
+    "chunk_number": 73,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 65 Swagatika Dalai Now, a[left] = 9, a[right] = 24, and a[pivot] = 24. As a[pivot] > a[left], so algorithm moves one position to right as - Now, a[left] = 29, a[right] ...",
+    "questions": [
+      {
+        "question": "What is Pivot?",
+        "answer": "KIIT POLYTECHNIC Data Structure 65 Swagatika Dalai Now, a[left] = 9, a[right] = 24, and a[pivot] = 24.",
+        "term": "Pivot"
+      },
+      {
+        "question": "What is the purpose of Swagatika Dalai Now?",
+        "answer": "KIIT POLYTECHNIC Data Structure 65 Swagatika Dalai Now, a[left] = 9, a[right] = 24, and a[pivot] = 24.",
+        "term": "Swagatika Dalai Now"
+      },
+      {
+        "question": "Explain Since.",
+        "answer": "– Since, pivot is at left, so algorithm starts from right, and move to left.",
+        "term": "Since"
+      }
+    ]
+  },
+  {
+    "chunk_number": 74,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 66 Swagatika Dalai Now, a[pivot] = 24, a[left] = 24, and a[right] = 24. So, pivot, left and right are pointing the same element. It represents the termination of proced...",
+    "questions": [
+      {
+        "question": "What is Element?",
+        "answer": "So, pivot, left and right are pointing the same element.",
+        "term": "Element"
+      },
+      {
+        "question": "Define FIRST.",
+        "answer": "SIMPLE MERGE SIMPLE MERGE [FIRST,SECOND,THIRD,K] Given two orders in table sorted in a vector K with FIRST, SECOND, THIRD [Note: This page contains 3 diagram(s)/image(s)]",
+        "term": "FIRST"
+      },
+      {
+        "question": "What is the purpose of SECOND?",
+        "answer": "SIMPLE MERGE SIMPLE MERGE [FIRST,SECOND,THIRD,K] Given two orders in table sorted in a vector K with FIRST, SECOND, THIRD [Note: This page contains 3 diagram(s)/image(s)]",
+        "term": "SECOND"
+      }
+    ]
+  },
+  {
+    "chunk_number": 75,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 67 Swagatika Dalai The variable I & J denotes the curser associated with the FIRST & SECOND table respectively. L is the index variable associated with the vector TEMP....",
+    "questions": [
+      {
+        "question": "What is TEMP?",
+        "answer": "L is the index variable associated with the vector TEMP.",
+        "term": "TEMP"
+      }
+    ]
+  },
+  {
+    "chunk_number": 77,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 70 Swagatika Dalai Example: Suppose the array elements are 11, 22, 33, 44, 55, 66, 77 We wish to search for 33 So key = 33 low = 0 hi = 6 n = 7 Is low <= hi Yes mid = (...",
+    "questions": [
+      {
+        "question": "What is Swagatika Dalai Example?",
+        "answer": "KIIT POLYTECHNIC Data Structure 70 Swagatika Dalai Example: Suppose the array elements are 11, 22, 33, 44, 55, 66, 77 We wish to search for 33 So key = 33 low = 0 hi = 6 n = 7 Is low <= hi Yes mid = (low+hi)/2=(0+6)/2=3 Is 33 == a[3] No Is 33 < a[3] yes the steps will be repeated for lower half hi = mid-1=3-1=2 low = 0 Is low <= hi Mid=(0+2)/2=1 If key (33) == a[1] No If 33 < a[1] No low = 1+1 =2 hi = 2 mid=(2+2)/2=2 Is 33 == a[2] Yes the search is successful at index 2.",
+        "term": "Swagatika Dalai Example"
+      }
+    ]
+  },
+  {
+    "chunk_number": 80,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 72 Swagatika Dalai ..pppptt PPoowweerrPPooiinntt PPrreesseennttaattiioonn M Miiccrroossoofftt PPoowweerrPPooiinntt ..ppddff PPoorrttaabbllee DDooccuum meenntt FFoorrm m...",
+    "questions": [
+      {
+        "question": "What is access method?",
+        "answer": "There are 3 different file access methods.",
+        "term": "access method"
+      }
+    ]
+  },
+  {
+    "chunk_number": 81,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 73 Swagatika Dalai Direct access/ Random access method:  Direct access is also called as relative access.  In this method records can read/write randomly without any ...",
+    "questions": [
+      {
+        "question": "Define access method.",
+        "answer": "KIIT POLYTECHNIC Data Structure 73 Swagatika Dalai Direct access/ Random access method:  Direct access is also called as relative access.",
+        "term": "access method"
+      }
+    ]
+  },
+  {
+    "chunk_number": 83,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 75 Swagatika Dalai The remainder is calculated physical address for that record. Suppose key value of the record is 2345. i.e. k =2345 and m = 97 then H(k) = 2345 % 97=...",
+    "questions": [
+      {
+        "question": "Describe that record.",
+        "answer": "KIIT POLYTECHNIC Data Structure 75 Swagatika Dalai The remainder is calculated physical address for that record.",
+        "term": "that record"
+      }
+    ]
+  },
+  {
+    "chunk_number": 84,
+    "text_preview": "KIIT POLYTECHNIC Data Structure 76 Swagatika Dalai Advantages - Accessing a record is faster. - No need to arrange the record on a sorted order. - If required, records can be processed sequentially. -...",
+    "questions": [
+      {
+        "question": "What is the purpose of Insertion?",
+        "answer": "- Insertion, deletion is easier Disadvantage - Expensive I/O device as compared to sequential file structure.",
+        "term": "Insertion"
+      }
+    ]
+  }
+]
