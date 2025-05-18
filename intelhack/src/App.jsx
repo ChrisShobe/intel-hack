@@ -10,7 +10,7 @@ return (
 <div>
 <BrowserRouter>
 <Routes>
-    <Route path="/" element={<QuestionPage />} />
+    <Route path="/" element={<UploadPage />} />
     <Route path="/upload" element={<UploadPage />} />
     <Route path="/questions" element={<QuestionPage />}/>
     <Route path="/end" element={<FinishPage />}/>
