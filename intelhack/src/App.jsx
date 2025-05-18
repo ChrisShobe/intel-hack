@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import UploadPage from "./UploadPage";
 import QuestionPage from "./QuestionPage";
+import FinishPage from "./FinishPage";
 // import About from "./About";
 function App() {
 return (
@@ -12,6 +13,7 @@ return (
     <Route path="/" element={<QuestionPage />} />
     <Route path="/upload" element={<UploadPage />} />
     <Route path="/questions" element={<QuestionPage />}/>
+    <Route path="/end" element={<FinishPage />}/>
     {/* <Route path="/about" element={<About />}></Route> */}
 </Routes>
 </BrowserRouter>
