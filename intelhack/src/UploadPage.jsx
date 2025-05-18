@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // import useNavigate
 
 function UploadPage() {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState('');
+  const navigate = useNavigate();  // initialize navigate
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -17,6 +19,7 @@ function UploadPage() {
 
     const formData = new FormData();
     formData.append('pdf', file);
+    setStatus('Loading...');
 
     try {
       const response = await fetch('/api/upload', { method: 'POST', body: formData })
@@ -29,6 +32,10 @@ function UploadPage() {
 
       const result = await response.json();
       setStatus(result.message || 'Upload complete!');
+
+      // Navigate to the question page after upload success
+      navigate('/questions');  // <-- change this to your actual QuestionPage route
+
     } catch (err) {
       setStatus('Upload failed (network error).');
       console.error(err);
@@ -97,7 +104,7 @@ function UploadPage() {
       </form>
 
       {/* Status Message */}
-      {status && <p className="mt-6 text-center text-lg text-[red]">{status}</p>}
+      {status && <p className="mt-6 text-center text-lg text-[#C4C4C4]">{status}</p>}
     </div>
   );
 }

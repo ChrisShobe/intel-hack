@@ -49,7 +49,7 @@ def upload_pdf():
         quiz_data = generate_quiz_from_chunk_file(chunk_output_path, json_output_path, csv_output_path)
 
         # Path to the React public directory (adjust this if needed)
-        frontend_public_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../frontend/public'))
+        frontend_public_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../intelhack/public'))
         public_json_path = os.path.join(frontend_public_path, 'quizData.json')
 
         # Copy quiz JSON to public so React frontend can access it

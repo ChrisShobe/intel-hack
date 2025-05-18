@@ -1,0 +1,107 @@
+--- Page 1 ---
+Complex Numbers
+Read Appendix B of your textbook before attending this session
+ELEN 50L
+Week 7 Workshop
+
+--- Page 2 ---
+Complex Numbers
+A complex number z is written as  z = x + j y, with 𝒋𝒋=
+−𝟏𝟏
+with real part = x and imaginary part = y
+Rectangular form: z = x + j y
+Polar form: z = 𝒓𝒓𝒓𝒓𝒋𝒋𝒋𝒋= 𝒓𝒓𝒓𝒓𝒓
+
+--- Page 3 ---
+Complex Numbers: Polar/Rectangular Forms
+Real Axis
+Imaginary Axis
+ℜ𝑒𝑒𝑧𝑧= 𝑥𝑥
+ℑ𝑚𝑚𝑧𝑧= 𝑦𝑦
+Rectangular: 𝑧𝑧= 𝑥𝑥+ 𝑗𝑗𝑗𝑗
+𝑧𝑧
+Polar: 𝑧𝑧= 𝑟𝑟𝑟𝜙𝜙
+𝜙𝜙
+𝑦𝑦= 𝑟𝑟sin 𝜙𝜙
+𝑥𝑥= 𝑟𝑟𝑐𝑐𝑐𝑐𝑐𝑐𝜙𝜙
+𝑟𝑟=
+𝑥𝑥2 + 𝑦𝑦2
+Prelab assignment #1: verify 
+the equivalency of rectangular 
+and polar forms
+A complex number can be represented 
+as a point on a plane, called the Complex 
+Plane. The line from the origin of the 
+plane to that point is similar to a 2D 
+vector, with x and y components. 
+Therefore, as in 2D vectors, a complex 
+number can be expressed in Cartesian 
+(rectangular) or polar form.
+
+--- Page 4 ---
+Complex Number Arithmetic
+Remember:
+[Note: This page contains 1 diagram(s)/image(s)]
+
+--- Page 5 ---
+Complex Number Arithmetic
+z1 + z2 =
+z1/z2 =
+z1 =
+z2 =
+z1 • z2 =
+z1 -z2 =
+
+--- Page 6 ---
+Complex Number Arithmetic
+zz*= x2 + y2 = r2
+Prelab assignment #2: show
+z =
+z 
+z 
+z*
+
+--- Page 7 ---
+Use a complex conjugate to realize the denominator of the ratio of 
+2 complex numbers
+z = (3 + j4)/(1 – j2)
+Prelab assignment #3: compute z as a single complex number 
+in rectangular and polar forms. Indicate in which quadrant the 
+number resides.
+
+--- Page 8 ---
+In-lab Exercise 1: Complex number arithmetic
+z =
+
+--- Page 9 ---
+Exercise 1 (continued)
+z =
+
+--- Page 10 ---
+Exercise 1 results
+z =
+
+--- Page 11 ---
+In-lab Exercise 2: Solve an equation with one unknown complex 
+number and express it in rectangular and polar forms
+10∠0° = Ṽ
+5 +
+Ṽ
+−𝑗𝑗𝑗𝑗/9 + Ṽ
+𝑗𝑗𝑗+ Ṽ+ j100
+20
+
+--- Page 12 ---
+Assignment
+(to be completed during lab, using calculator if needed)
+•
+Worksheet has 5 problems.
+•
+Solve all problems by pencil-and-paper, showing each 
+step explicitly.
+•
+Optional: if time permits, you may use any tool at your 
+disposal, such as programmable calculator, MATLAB, 
+HP Prime, etc. to check your answers.
+•
+Hand in your worksheet before leaving the lab.
