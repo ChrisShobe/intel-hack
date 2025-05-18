@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-function QuestionPage() {
+function QuestionPage({ section = 0 }) {
   const [quizData, setQuizData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState("");  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const params = new URLSearchParams(location.search);
+  const sectionParam = parseInt(params.get("section") || section, 10);
 
   // Load JSON on mount
   useEffect(() => {
@@ -12,9 +18,14 @@ function QuestionPage() {
       .then((res) => res.json())
       .then((data) => {
         const allQuestions = data.flatMap(chunk => chunk.questions);
-        setQuizData(allQuestions);
+        const start = sectionParam * 10;
+        const end = start + 10;
+        setQuizData(allQuestions.slice(start, end));
+        setCurrentIndex(0);
+        setAnswer("");
+        setFeedback("");
       });
-  }, []);
+  }, [sectionParam]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +45,9 @@ function QuestionPage() {
       setCurrentIndex(currentIndex + 1);
       setAnswer("");
       setFeedback("");
+    } else {
+      // On last question, go to finish page
+      navigate(`/end?section=${sectionParam}`);
     }
   };
 
@@ -68,14 +82,9 @@ function QuestionPage() {
 
       <button
         onClick={handleNextQuestion}
-        disabled={currentIndex >= quizData.length - 1}
-        className={`mt-4 px-6 py-2 font-semibold rounded ${
-          currentIndex >= quizData.length - 1
-            ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-            : "bg-white text-[#4F959D] hover:bg-[#E2E5AE]"
-        }`}
+        className="mt-4 px-6 py-2 font-semibold rounded bg-white text-[#4F959D] hover:bg-[#E2E5AE]"
       >
-        Next Question
+        {currentIndex >= quizData.length - 1 ? "Finish" : "Next Question"}
       </button>
     </div>
   );

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function FinishPage() {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState('');
+  const navigate = useNavigate();
+
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -53,6 +57,8 @@ function FinishPage() {
         <button
           type="return"
           className="px-11 py-3 bg-white text-[#4F959D] font-semibold rounded hover:bg-gray-100 transition"
+          onClick={() => navigate('/upload')}
+
         >
           Return to File Upload
         </button>
@@ -61,6 +67,7 @@ function FinishPage() {
         <button
           type="generate"
           className="px-8 py-3 bg-white text-[#4F959D] font-semibold rounded hover:bg-gray-100 transition"
+          onClick={() => navigate('/questions')}
         >
           Generate New Questions
         </button>
