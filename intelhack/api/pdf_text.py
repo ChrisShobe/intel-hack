@@ -2,7 +2,7 @@ import fitz  # PyMuPDF
 import os
 
 def extract_text_and_note_images(pdf_path, output_path):
-    doc = fitz.open("uploads/dsa.pdf")
+    doc = fitz.open(pdf_path)
     output_lines = []
 
     for page_num, page in enumerate(doc, start=1):
